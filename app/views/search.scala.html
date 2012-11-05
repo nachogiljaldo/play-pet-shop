@@ -1,7 +1,31 @@
-@(message: String)
+@(searchParams: Form[(Option[Int], Long, Option[Long])], errors: Seq[FormError], foundPets : Set[services.Pet])
 
-@main("Index page of petshop") {
+@main("Search pets") {
     <h1>play-framework petshop!</h1>
-    <h2>Purpose?</h2>
-    <p>The purpose is helping me, and other developers to understand a better use of Play Framework</p>
+    <h2>Search</h2>
+
+    @helper.form(action = routes.Pets.performSearch) {
+        @helper.inputText(searchParams("typeId"))
+        @helper.inputText(searchParams("minPrice"))
+        @helper.inputText(searchParams("maxPrice"))
+        <input type="submit" value="Search">
+    }
+    <table>
+        <tr>
+            <th>id</th>
+            <th>Name</th>
+            <th>Birthday</th>
+            <th>Price</th>
+            <th>Type</th>
+        </tr>
+    @for(row <- foundPets) {
+        <tr>
+            <td>@row.id</td>
+            <td>@row.name</td>
+            <td>@row.birthday</td>
+            <td>@row.price</td>
+            <td>@row.petTypeId</td>
+        </tr>
+    }
+    </table>
 }
