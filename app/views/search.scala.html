@@ -20,9 +20,12 @@
         </tr>
     @for(row <- foundPets) {
         <tr>
-            <td>@row.id</td>
+            <td>
+                <a href="@routes.Pets.show(row.id)">@row.id</a>
+
+            </td>
             <td>@row.name</td>
-            <td>@row.birthday</td>
+            <td>@row.birthday.getTime</td>
             <td>@row.price</td>
             <td>@row.petTypeId</td>
         </tr>

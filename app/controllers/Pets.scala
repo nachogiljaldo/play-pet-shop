@@ -19,7 +19,7 @@ object Pets extends Controller {
   )
 
   def show(id : Long) = Action {
-    Ok(views.html.pet(id))
+    Ok(views.html.pet(Pet.findById(id)))
   }
 
   def create = TODO
@@ -33,7 +33,7 @@ object Pets extends Controller {
   def performSearch = Action { implicit request =>
     petSearch.bindFromRequest().fold(
       hasErrors => Ok(views.html.search(petSearch, hasErrors.globalErrors, Set[Pet]()))
-      , success => Ok(views.html.search(petSearch, Nil, Pet.findPets(petSearch.get))))
+      , success => Ok(views.html.search(petSearch, Nil, Pet.findPets(success))))
   }
 
 }

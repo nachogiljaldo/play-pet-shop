@@ -1,6 +1,13 @@
-@(petId: Long)
+@(pet : services.Pet)
 
-@main("Pet details - " + petId) {
+@main("Pet details - " + pet.id) {
     <h1>play-framework petshop!</h1>
     <h2>Pet details</h2>
+    <label>Id</label><div>@pet.id</div>
+    <label>Name</label><div>@pet.name</div>
+    <label>Birthday</label><div>@pet.birthday.getTime</div>
+    <label>Price</label><div>@pet.price</div>
+    <label>Type</label><div>@pet.petTypeId</div>
+
+    <a href="@routes.Pets.search">Back</a>
 }
