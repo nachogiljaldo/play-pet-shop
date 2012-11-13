@@ -4,6 +4,7 @@ import play.api.mvc._
 import play.api.data.Form
 import play.api.data.Forms._
 import services.Pet
+import java.util.Calendar
 
 object Pets extends Controller {
 
@@ -18,11 +19,29 @@ object Pets extends Controller {
     })
   )
 
+  val petCreation = Form(
+    tuple(
+      "id" -> optional(longNumber),
+      "typeId" -> number,
+      "price" -> longNumber,
+      "name" -> text,
+      "birthday" -> date
+    )
+  )
+
   def show(id : Long) = Action {
     Ok(views.html.pet(Pet.findById(id)))
   }
 
-  def create = TODO
+  def create = Action {
+    Ok(views.html.create(petCreation.fill((None, 0, -1L, "", Calendar.getInstance().getTime))))
+  }
+
+  def doCreate = Action { implicit request =>
+    petCreation.bindFromRequest().fold(
+      hasErrors => create.apply(request)
+      , success => Ok(views.html.pet(Pet.persistPet(success))))
+  }
 
   def update(id : Long) = TODO
 

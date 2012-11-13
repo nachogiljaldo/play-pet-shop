@@ -9,7 +9,8 @@ GET     /                           controllers.Application.index
 GET /search controllers.Pets.search
 POST /search controllers.Pets.performSearch
 GET /pets/:id controllers.Pets.show(id :Long)
-POST /pets controllers.Pets.create
+GET /pets controllers.Pets.create
+POST /pets controllers.Pets.doCreate
 PUT /pets/:id controllers.Pets.update(id :Long)
 
 # Help page for Play framework

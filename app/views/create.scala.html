@@ -1,0 +1,16 @@
+@(pet : Form[(Option[Long], Int, Long, String, java.util.Date)])
+
+@main("Pet details - " + pet("id")) {
+    <h1>play-framework petshop!</h1>
+    <h2>Pet details</h2>
+    @helper.form(action = routes.Pets.doCreate) {
+        <label>Id</label>@helper.inputText(pet("id"))
+        <label>Price</label>@helper.inputText(pet("price"))
+        <label>Birthday</label>@helper.inputDate(pet("birthday"))
+        <label>Name</label>@helper.inputText(pet("name"))
+        <label>Type</label>@helper.inputText(pet("typeId"))
+        <input type="submit" value="Create">
+    }
+
+    <a href="@routes.Pets.search">Back</a>
+}
