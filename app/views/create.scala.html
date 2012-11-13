@@ -1,4 +1,4 @@
-@(pet : Form[(Option[Long], Int, Long, String, java.util.Date)])
+@(pet : Form[(Option[Long], Int, Long, String, java.util.Date)], types : Seq[(String, String)])
 
 @main("Pet details - " + pet("id")) {
     <h1>play-framework petshop!</h1>
@@ -8,7 +8,7 @@
         <label>Price</label>@helper.inputText(pet("price"))
         <label>Birthday</label>@helper.inputDate(pet("birthday"))
         <label>Name</label>@helper.inputText(pet("name"))
-        <label>Type</label>@helper.inputText(pet("typeId"))
+        <label>Type</label>@helper.select(field = pet("typeId"), options = types)
         <input type="submit" value="Create">
     }
 

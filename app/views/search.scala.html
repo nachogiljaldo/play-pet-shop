@@ -1,11 +1,11 @@
-@(searchParams: Form[(Option[Int], Long, Option[Long])], errors: Seq[FormError], foundPets : Set[services.Pet])
+@(searchParams: Form[(Option[Int], Long, Option[Long])], errors: Seq[FormError], foundPets : Set[services.Pet], types : Seq[(String, String)])
 
 @main("Search pets") {
     <h1>play-framework petshop!</h1>
     <h2>Search</h2>
 
     @helper.form(action = routes.Pets.performSearch) {
-        @helper.inputText(searchParams("typeId"))
+        @helper.select(field = searchParams("typeId"), options = types)
         @helper.inputText(searchParams("minPrice"))
         @helper.inputText(searchParams("maxPrice"))
         <input type="submit" value="Search">
@@ -28,8 +28,10 @@
             <td>@row.name</td>
             <td>@row.birthday.getTime</td>
             <td>@row.price</td>
-            <td>@row.petTypeId</td>
+            <td>@row.petType.description</td>
         </tr>
     }
     </table>
+
+@errors
 }
